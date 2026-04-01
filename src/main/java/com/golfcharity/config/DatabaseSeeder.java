@@ -18,23 +18,16 @@ public class DatabaseSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         String adminEmail = "shivkumarthakur9693@gmail.com";
-        
-        // Safety Patch: Unban all existing legacy users caused by the recent boolean 'enabled' schema addition
-        userRepository.findAll().forEach(user -> {
-            if (!user.isEnabled()) {
-                user.setEnabled(true);
-                userRepository.save(user);
-            }
-        });
-        
+        // New Database: Set up the Default Admin account
         if (userRepository.findByEmail(adminEmail).isEmpty()) {
             User admin = User.builder()
                     .email(adminEmail)
                     .password(passwordEncoder.encode("12345"))
                     .role(Role.ADMIN)
+                    .enabled(true)
                     .build();
             userRepository.save(admin);
-            System.out.println("Default Admin Account Created: " + adminEmail);
+            System.out.println("New Database Initialized! Admin Created: " + adminEmail);
         }
     }
 }
