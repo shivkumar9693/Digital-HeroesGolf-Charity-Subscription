@@ -9,23 +9,26 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         :root{
-            --bg: #f8f9fa;
-            --surface: rgba(255,255,255,0.88);
-            --text: #0f172a;
-            --brand: #1e3c72;
-            --brand-2: #2a5298;
-            --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.06);
-            --shadow-md: 0 18px 50px rgba(15, 23, 42, 0.12);
-            --ring: 0 0 0 .25rem rgba(30, 60, 114, .22);
+            --nf-bg: #141414;
+            --nf-bg-2: #0b0b0b;
+            --nf-surface: rgba(32,32,32,.78);
+            --nf-surface-2: rgba(24,24,24,.92);
+            --nf-text: #e5e5e5;
+            --nf-muted: rgba(229,229,229,.72);
+            --nf-red: #e50914;
+            --nf-red-2: #b20710;
+            --nf-shadow-sm: 0 10px 30px rgba(0,0,0,.35);
+            --nf-shadow-md: 0 26px 70px rgba(0,0,0,.55);
+            --nf-ring: 0 0 0 .25rem rgba(229, 9, 20, .28);
             --radius: 18px;
         }
 
         body{
             background:
-                radial-gradient(900px 600px at 15% 0%, rgba(30,60,114,.10), transparent 60%),
-                radial-gradient(900px 600px at 95% 5%, rgba(42,82,152,.10), transparent 55%),
-                var(--bg);
-            color: var(--text);
+                radial-gradient(900px 600px at 15% 0%, rgba(229,9,20,.16), transparent 55%),
+                radial-gradient(900px 600px at 85% 10%, rgba(255,255,255,.06), transparent 55%),
+                linear-gradient(180deg, var(--nf-bg-2), var(--nf-bg));
+            color: var(--nf-text);
             font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
             text-rendering: optimizeLegibility;
         }
@@ -33,15 +36,16 @@
         .card{
             border: 0;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            background: var(--surface);
+            box-shadow: var(--nf-shadow-sm);
+            background: linear-gradient(180deg, rgba(40,40,40,.85), rgba(20,20,20,.92));
             transform: translateZ(0);
             transition: transform .18s ease, box-shadow .18s ease;
             animation: fadeUp .5s ease both;
+            color: var(--nf-text);
         }
         .card:hover{
             transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--nf-shadow-md);
         }
 
         .nav-link{
@@ -54,31 +58,73 @@
         }
         .nav-link.active{
             opacity: 1;
-            border-bottom: 2px solid rgba(255,255,255,.9);
+            border-bottom: 2px solid rgba(229, 9, 20, .9);
+        }
+
+        .navbar-toggler:focus{
+            box-shadow: var(--nf-ring);
+        }
+
+        @media (max-width: 991.98px){
+            .navbar .navbar-collapse{
+                background: rgba(0,0,0,.62);
+                border: 1px solid rgba(255,255,255,.08);
+                border-radius: 16px;
+                padding: 12px;
+                margin-top: 12px;
+                box-shadow: var(--nf-shadow-sm);
+            }
+            .navbar-nav{
+                gap: 4px;
+            }
+            .navbar-nav .nav-link{
+                padding: 10px 12px;
+                border-radius: 12px;
+            }
+            .navbar-nav .nav-link.active{
+                border-bottom: 0;
+                background: rgba(229,9,20,.16);
+            }
         }
 
         .btn{
             transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
         }
         .btn:active{ transform: translateY(1px); }
-        .btn:focus-visible{ box-shadow: var(--ring); }
+        .btn:focus-visible{ box-shadow: var(--nf-ring); }
+
+        .btn-primary{
+            background-color: var(--nf-red);
+            border-color: var(--nf-red);
+            box-shadow: 0 12px 26px rgba(229,9,20,.22);
+        }
+        .btn-primary:hover{
+            background-color: var(--nf-red-2);
+            border-color: var(--nf-red-2);
+        }
+        .btn-outline-light:hover{ background-color: rgba(255,255,255,.10); }
 
         .form-control:focus,
         .form-select:focus{
-            box-shadow: var(--ring);
-            border-color: rgba(30,60,114,.35);
+            box-shadow: var(--nf-ring);
+            border-color: rgba(229, 9, 20, .35);
         }
 
         .list-group-item{
             transition: background-color .15s ease, transform .15s ease;
         }
         .list-group-item:hover{
-            background-color: rgba(30,60,114,.04);
+            background-color: rgba(229,9,20,.06);
             transform: translateY(-1px);
         }
 
         .badge{
-            box-shadow: 0 14px 26px rgba(15,23,42,.12);
+            box-shadow: 0 14px 28px rgba(0,0,0,.35);
+        }
+
+        .list-group-item{
+            background: transparent;
+            color: var(--nf-text);
         }
 
         .container > .d-flex{

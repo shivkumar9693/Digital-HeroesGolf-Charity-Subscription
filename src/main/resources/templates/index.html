@@ -10,31 +10,31 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         :root{
-            --bg: #f8f9fa;
-            --text: #0f172a;
-            --muted: #64748b;
-            --brand: #1e3c72;
-            --brand-2: #2a5298;
-            --accent: #ff6b6b;
-            --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.08);
-            --shadow-md: 0 26px 70px rgba(15, 23, 42, 0.18);
-            --ring: 0 0 0 .25rem rgba(255, 107, 107, .22);
+            --nf-bg: #141414;
+            --nf-bg-2: #0b0b0b;
+            --nf-text: #e5e5e5;
+            --nf-muted: rgba(229,229,229,.72);
+            --nf-red: #e50914;
+            --nf-red-2: #b20710;
+            --nf-shadow-sm: 0 10px 30px rgba(0,0,0,.35);
+            --nf-shadow-md: 0 26px 70px rgba(0,0,0,.55);
+            --nf-ring: 0 0 0 .25rem rgba(229, 9, 20, .28);
         }
 
         body{
             font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
             background:
-                radial-gradient(900px 600px at 15% 0%, rgba(30,60,114,.10), transparent 60%),
-                radial-gradient(900px 600px at 95% 5%, rgba(42,82,152,.10), transparent 55%),
-                var(--bg);
-            color: var(--text);
+                radial-gradient(900px 600px at 15% 0%, rgba(229,9,20,.16), transparent 55%),
+                radial-gradient(900px 600px at 85% 10%, rgba(255,255,255,.06), transparent 55%),
+                linear-gradient(180deg, var(--nf-bg-2), var(--nf-bg));
+            color: var(--nf-text);
             text-rendering: optimizeLegibility;
         }
 
         .hero{
             background:
-                radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.18), transparent 55%),
-                linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+                radial-gradient(900px 500px at 20% 10%, rgba(229,9,20,.20), transparent 55%),
+                linear-gradient(135deg, #0b0b0b 0%, #141414 55%, #0b0b0b 100%);
             color: #fff;
             padding: 110px 0;
             text-align: center;
@@ -66,43 +66,69 @@
         }
 
         .btn-subscribe{
-            background-color: var(--accent);
+            background-color: var(--nf-red);
             color: #fff;
             border: none;
             padding: 15px 32px;
             font-size: 1.15rem;
             border-radius: 999px;
             font-weight: 700;
-            box-shadow: 0 14px 30px rgba(255, 107, 107, 0.35);
+            box-shadow: 0 14px 30px rgba(229, 9, 20, 0.28);
             transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
             animation: fadeUp .75s ease both;
         }
         .btn-subscribe:hover{
             transform: translateY(-3px);
-            background-color: #ff5252;
+            background-color: var(--nf-red-2);
             color: #fff;
-            box-shadow: 0 18px 40px rgba(255, 107, 107, 0.42);
+            box-shadow: 0 18px 40px rgba(229, 9, 20, 0.34);
         }
         .btn-subscribe:active{ transform: translateY(1px); }
-        .btn-subscribe:focus-visible{ box-shadow: var(--ring); }
+        .btn-subscribe:focus-visible{ box-shadow: var(--nf-ring); }
 
         .feature-icon{
             font-size: 3rem;
-            color: var(--brand-2);
+            color: rgba(255,255,255,.90);
             margin-bottom: 18px;
-            filter: drop-shadow(0 10px 16px rgba(15,23,42,.10));
+            filter: drop-shadow(0 16px 26px rgba(0,0,0,.45));
         }
 
         .charity-impact{
-            background-color: rgba(255,255,255,.85);
+            background-color: rgba(0,0,0,.35);
             padding: 80px 0;
-            box-shadow: 0 -1px 0 rgba(15,23,42,.06);
+            box-shadow: 0 -1px 0 rgba(255,255,255,.06);
         }
 
         .navbar-brand{
             font-weight: 800;
             color: #fff !important;
             letter-spacing: .2px;
+        }
+
+        .navbar-toggler:focus{
+            box-shadow: var(--nf-ring);
+        }
+
+        @media (max-width: 991.98px){
+            .navbar .navbar-collapse{
+                background: rgba(0,0,0,.62);
+                border: 1px solid rgba(255,255,255,.08);
+                border-radius: 16px;
+                padding: 12px;
+                margin-top: 12px;
+                box-shadow: var(--nf-shadow-sm);
+            }
+            .navbar-nav{
+                gap: 4px;
+            }
+            .navbar-nav .nav-link{
+                padding: 10px 12px;
+                border-radius: 12px;
+            }
+            .navbar-nav .nav-link.active{
+                border-bottom: 0;
+                background: rgba(229,9,20,.16);
+            }
         }
 
         @keyframes fadeUp{
@@ -180,7 +206,19 @@
     <div class="container">
         <h2>Make an Impact</h2>
         <p class="lead mt-3 text-muted">Over $50,000 raised for global and local charities this year. Join the movement.</p>
-        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000" class="img-fluid rounded mt-4 shadow-lg" alt="Charity Golf" style="max-height: 400px; object-fit: cover; width: 100%;">
+        <img src="https://images.unsplash.com/photo-1500930288131-124f49d17b72?auto=format&fit=crop&q=80&w=1200" class="img-fluid rounded mt-4 shadow-lg" alt="Golf course at sunset" style="max-height: 400px; object-fit: cover; width: 100%;">
+
+        <div class="row g-3 mt-4 text-start">
+            <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&q=80&w=900" class="img-fluid rounded shadow-sm" alt="Golfer swing" style="height: 210px; object-fit: cover; width: 100%;">
+            </div>
+            <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&q=80&w=900" class="img-fluid rounded shadow-sm" alt="Golf ball on green" style="height: 210px; object-fit: cover; width: 100%;">
+            </div>
+            <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1520975958221-35d9b0656515?auto=format&fit=crop&q=80&w=900" class="img-fluid rounded shadow-sm" alt="Golf putting" style="height: 210px; object-fit: cover; width: 100%;">
+            </div>
+        </div>
     </div>
 </div>
 
