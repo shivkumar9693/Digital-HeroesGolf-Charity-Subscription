@@ -53,6 +53,8 @@ public class AdminController {
             
             if (!user.isEnabled()) {
                 emailService.sendAccountBannedEmail(user.getEmail());
+            } else {
+                emailService.sendAccountUnbannedEmail(user.getEmail());
             }
         }
         return "redirect:/admin/users";

@@ -6,10 +6,14 @@ import com.golfcharity.repository.UserRepository;
 import com.golfcharity.service.ScoreService;
 import com.golfcharity.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -32,6 +36,12 @@ public class DashboardController {
         // Admin redirect logic
         if (user.getRole() == com.golfcharity.entity.Role.ADMIN) {
             return "redirect:/admin/dashboard";
+        }
+
+        // Sync role from DB with current session to avoid stale Role.PUBLIC_VISITOR status after payment
+        if (authentication.getAuthorities().size() != user.getAuthorities().size()) {
+            Authentication newAuth = new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(newAuth);
         }
         
         model.addAttribute("user", user);

@@ -54,24 +54,31 @@ public class StripeController {
         try {
             event = Webhook.constructEvent(payload, sigHeader, endpointSecret);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Webhook signature failed");
+            System.err.println("Webhook signature failed for payload: " + payload);
+            return ResponseEntity.badRequest().body("Webhook signature failed: " + e.getMessage());
         }
 
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         StripeObject stripeObject = dataObjectDeserializer.getObject().orElse(null);
 
+        System.out.println("Received Stripe event: " + event.getType());
+
         if ("checkout.session.completed".equals(event.getType())) {
             Session session = (Session) stripeObject;
-            String customerEmail = session.getCustomerDetails().getEmail();
-            String stripeCustomerId = session.getCustomer();
-            String stripeSubscriptionId = session.getSubscription();
-            String plan = session.getMetadata().get("plan");
-            
-            LocalDate renewalDate = "YEARLY".equalsIgnoreCase(plan) ? 
-                LocalDate.now().plusYears(1) : LocalDate.now().plusMonths(1);
-            
-            subscriptionService.createOrUpdateSubscription(customerEmail, stripeCustomerId, stripeSubscriptionId, plan, SubscriptionStatus.ACTIVE, renewalDate);
-            emailService.sendPaymentSuccessEmail(customerEmail, plan);
+            if (session != null && session.getCustomerDetails() != null) {
+                String customerEmail = session.getCustomerDetails().getEmail();
+                String stripeCustomerId = session.getCustomer();
+                String stripeSubscriptionId = session.getSubscription();
+                String plan = session.getMetadata().get("plan");
+                
+                System.out.println("Processing subscription for email: " + customerEmail + ", plan: " + plan);
+                
+                LocalDate renewalDate = "YEARLY".equalsIgnoreCase(plan) ? 
+                    LocalDate.now().plusYears(1) : LocalDate.now().plusMonths(1);
+                
+                subscriptionService.createOrUpdateSubscription(customerEmail, stripeCustomerId, stripeSubscriptionId, plan, SubscriptionStatus.ACTIVE, renewalDate);
+                emailService.sendPaymentSuccessEmail(customerEmail, plan);
+            }
         }
 
         return ResponseEntity.ok("");

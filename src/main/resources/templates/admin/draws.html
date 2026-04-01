@@ -198,7 +198,7 @@
                 <tbody>
                     <tr th:each="d : ${draws}">
                         <td th:text="${d.id}" class="fw-bold">1</td>
-                        <td th:text="${d.month + '/' + d.year}" class="fw-bold">04/2024</td>
+                        <td th:text="${(d.month != null ? d.month : '??') + '/' + (d.year != null ? d.year : '????')}" class="fw-bold">04/2024</td>
                         <td>
                             <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold shadow-sm" th:if="${d.status.name() == 'SIMULATION'}">🛠️ SIMULATION</span>
                             <span class="badge bg-success px-3 py-2 rounded-pill fw-bold shadow-sm" th:if="${d.status.name() == 'PUBLISHED'}">✅ PUBLISHED</span>

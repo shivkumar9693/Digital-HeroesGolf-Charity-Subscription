@@ -172,15 +172,15 @@
                 <div class="card-body">
                     <h5 class="card-title text-muted fw-bold">Subscription Status</h5>
                     <div class="d-flex align-items-center mt-4">
-                        <div class="me-3 fs-1" th:if="${subscription != null and subscription.status.name() == 'ACTIVE'}">✨</div>
-                        <div class="me-3 fs-1" th:if="${subscription == null or subscription.status.name() != 'ACTIVE'}">⚠️</div>
+                        <div class="me-3 fs-1" th:if="${subscription != null and subscription.status != null and subscription.status.name() == 'ACTIVE'}">✨</div>
+                        <div class="me-3 fs-1" th:if="${subscription == null or subscription.status == null or subscription.status.name() != 'ACTIVE'}">⚠️</div>
                         <div>
-                            <h2 th:if="${subscription != null and subscription.status.name() == 'ACTIVE'}" class="text-success fw-bold mb-0">ACTIVE</h2>
-                            <h2 th:if="${subscription == null or subscription.status.name() != 'ACTIVE'}" class="text-danger fw-bold mb-0">INACTIVE</h2>
+                            <h2 th:if="${subscription != null and subscription.status != null and subscription.status.name() == 'ACTIVE'}" class="text-success fw-bold mb-0">ACTIVE</h2>
+                            <h2 th:if="${subscription == null or subscription.status == null or subscription.status.name() != 'ACTIVE'}" class="text-danger fw-bold mb-0">INACTIVE</h2>
                         </div>
                     </div>
                     <p th:if="${subscription != null}" class="text-muted mt-3 mb-0">Renews on: <strong th:text="${subscription.renewalDate}"></strong></p>
-                    <a th:if="${subscription == null or subscription.status.name() != 'ACTIVE'}" href="/pricing" class="btn btn-primary mt-4 rounded-pill fw-bold px-4 w-100">Subscribe Now</a>
+                    <a th:if="${subscription == null or (subscription.status != null and subscription.status.name() != 'ACTIVE')}" href="/pricing" class="btn btn-primary mt-4 rounded-pill fw-bold px-4 w-100">Subscribe Now</a>
                 </div>
             </div>
         </div>
