@@ -48,11 +48,11 @@ public class EmailService {
  
     public void sendAccountBannedEmail(String to) {
         sendHtmlEmail(to, "Important Update Regarding Your GolfForGood Account", "account-banned", 
-            Map.of("userEmail", to));
+            Map.of("userEmail", to, "baseUrl", baseUrl));
     }
 
     public void sendAccountUnbannedEmail(String to) {
         sendHtmlEmail(to, "Good News! Your GolfForGood Account is Active", "account-unbanned", 
-            Map.of("userEmail", to));
+            Map.of("userEmail", to, "baseUrl", baseUrl));
     }
 }
