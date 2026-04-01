@@ -7,15 +7,111 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
-        .hero { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 100px 0; text-align: center; }
-        .hero h1 { font-weight: 700; font-size: 3rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.25rem; font-weight: 300; margin-bottom: 40px; }
-        .btn-subscribe { background-color: #ff6b6b; color: white; border: none; padding: 15px 30px; font-size: 1.2rem; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); transition: transform 0.2s; }
-        .btn-subscribe:hover { transform: translateY(-3px); background-color: #ff5252; color: white; }
-        .feature-icon { font-size: 3rem; color: #2a5298; margin-bottom: 20px; }
-        .charity-impact { background-color: white; padding: 80px 0; }
-        .navbar-brand { font-weight: 700; color: #2a5298 !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root{
+            --bg: #f8f9fa;
+            --text: #0f172a;
+            --muted: #64748b;
+            --brand: #1e3c72;
+            --brand-2: #2a5298;
+            --accent: #ff6b6b;
+            --shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 26px 70px rgba(15, 23, 42, 0.18);
+            --ring: 0 0 0 .25rem rgba(255, 107, 107, .22);
+        }
+
+        body{
+            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(900px 600px at 15% 0%, rgba(30,60,114,.10), transparent 60%),
+                radial-gradient(900px 600px at 95% 5%, rgba(42,82,152,.10), transparent 55%),
+                var(--bg);
+            color: var(--text);
+            text-rendering: optimizeLegibility;
+        }
+
+        .hero{
+            background:
+                radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.18), transparent 55%),
+                linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+            color: #fff;
+            padding: 110px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after{
+            content: "";
+            position: absolute;
+            inset: -40% -20% auto -20%;
+            height: 520px;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,.22), transparent 55%);
+            transform: rotate(-8deg);
+            pointer-events: none;
+        }
+        .hero h1{
+            font-weight: 900;
+            font-size: clamp(2.4rem, 4vw, 3.35rem);
+            margin-bottom: 18px;
+            letter-spacing: -.02em;
+            animation: fadeUp .55s ease both;
+        }
+        .hero p{
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 38px;
+            opacity: .92;
+            animation: fadeUp .65s ease both;
+        }
+
+        .btn-subscribe{
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 15px 32px;
+            font-size: 1.15rem;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 14px 30px rgba(255, 107, 107, 0.35);
+            transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
+            animation: fadeUp .75s ease both;
+        }
+        .btn-subscribe:hover{
+            transform: translateY(-3px);
+            background-color: #ff5252;
+            color: #fff;
+            box-shadow: 0 18px 40px rgba(255, 107, 107, 0.42);
+        }
+        .btn-subscribe:active{ transform: translateY(1px); }
+        .btn-subscribe:focus-visible{ box-shadow: var(--ring); }
+
+        .feature-icon{
+            font-size: 3rem;
+            color: var(--brand-2);
+            margin-bottom: 18px;
+            filter: drop-shadow(0 10px 16px rgba(15,23,42,.10));
+        }
+
+        .charity-impact{
+            background-color: rgba(255,255,255,.85);
+            padding: 80px 0;
+            box-shadow: 0 -1px 0 rgba(15,23,42,.06);
+        }
+
+        .navbar-brand{
+            font-weight: 800;
+            color: #fff !important;
+            letter-spacing: .2px;
+        }
+
+        @keyframes fadeUp{
+            from{ opacity: 0; transform: translateY(10px); }
+            to{ opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce){
+            *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
     </style>
 </head>
 <body>

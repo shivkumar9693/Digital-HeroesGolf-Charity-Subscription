@@ -6,15 +6,90 @@
     <title>Pricing - Golf Charity Subscription</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; font-family: 'Inter', sans-serif;}
-        .card { border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); }
-        .nav-link { opacity: 0.8; transition: opacity 0.2s; }
-        .nav-link:hover, .nav-link.active { opacity: 1; border-bottom: 2px solid white; }
-        .pricing-card { border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.2s; }
-        .pricing-card:hover { transform: translateY(-5px); }
-        .card-header { background-color: #fff; border-bottom: none; font-weight: 700; padding: 30px 0 10px; border-radius: 15px 15px 0 0 !important; }
-        .price { font-size: 3rem; font-weight: 800; color: #1e3c72; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root{
+            --bg: #f8f9fa;
+            --surface: rgba(255,255,255,0.90);
+            --text: #0f172a;
+            --brand: #1e3c72;
+            --brand-2: #2a5298;
+            --shadow-sm: 0 10px 26px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 22px 60px rgba(15, 23, 42, 0.14);
+            --ring: 0 0 0 .25rem rgba(30, 60, 114, .22);
+            --radius: 18px;
+        }
+
+        body{
+            background:
+                radial-gradient(900px 600px at 15% 0%, rgba(30,60,114,.10), transparent 60%),
+                radial-gradient(900px 600px at 95% 5%, rgba(42,82,152,.10), transparent 55%),
+                var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            text-rendering: optimizeLegibility;
+        }
+
+        .nav-link{
+            opacity: .88;
+            transition: opacity .18s ease, transform .18s ease;
+        }
+        .nav-link:hover{
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+        .nav-link.active{
+            opacity: 1;
+            border-bottom: 2px solid rgba(255,255,255,.9);
+        }
+
+        .card,
+        .pricing-card{
+            border: 0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            background: var(--surface);
+            transform: translateZ(0);
+            transition: transform .18s ease, box-shadow .18s ease;
+            animation: fadeUp .55s ease both;
+        }
+        .card:hover,
+        .pricing-card:hover{
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header{
+            background-color: transparent;
+            border-bottom: none;
+            font-weight: 800;
+            padding: 30px 0 12px;
+            border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0 !important;
+        }
+        .price{
+            font-size: 3.1rem;
+            font-weight: 900;
+            color: var(--brand);
+            letter-spacing: -.02em;
+        }
+
+        .btn{
+            transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
+        }
+        .btn:active{ transform: translateY(1px); }
+        .btn:focus-visible{ box-shadow: var(--ring); }
+
+        .container > .d-flex{
+            animation: fadeUp .45s ease both;
+        }
+
+        @keyframes fadeUp{
+            from{ opacity: 0; transform: translateY(10px); }
+            to{ opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce){
+            *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
     </style>
 </head>
 <body>
