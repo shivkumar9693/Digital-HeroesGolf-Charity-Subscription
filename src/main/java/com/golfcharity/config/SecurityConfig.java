@@ -15,7 +15,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/register", "/login", "/charities", "/draws", "/css/**", "/js/**", "/images/**", "/webhook/**", "/actuator/health", "/pricing").permitAll()
+                .requestMatchers("/", "/register", "/login", "/charities", "/draws", "/css/**", "/js/**", "/images/**", "/webhook", "/actuator/health", "/pricing").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/dashboard/**", "/subscribe/**", "/scores/**", "/charity-selection").authenticated()
                 .anyRequest().authenticated()
@@ -39,7 +39,7 @@ public class SecurityConfig {
             )
             .csrf(csrf -> csrf
                 // Disable CSRF for Stripe Webhooks
-                .ignoringRequestMatchers("/webhook/**")
+                .ignoringRequestMatchers("/webhook")
             );
 
         return http.build();

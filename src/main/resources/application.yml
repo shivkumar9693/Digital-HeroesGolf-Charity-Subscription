@@ -1,41 +1,71 @@
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+    include-stacktrace: always
+  servlet:
+    session:
+      timeout: 15m
+ 
 spring:
   application:
     name: golf-charity-subscription
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: true
+ 
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/golfcharity?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:your_password}
-    driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+ 
   jpa:
     hibernate:
-      ddl-auto: ${DDL_AUTO:update}
-    show-sql: false
+      ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+ 
   mail:
-    host: ${SMTP_HOST:smtp.gmail.com}
-    port: ${SMTP_PORT:587}
-    username: ${SMTP_USERNAME:your_email}
-    password: ${SMTP_PASSWORD:your_app_password}
+    host: smtp-relay.brevo.com
+    port: 2525
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    protocol: smtp
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-
+          connectiontimeout: 15000
+          timeout: 15000
+          writetimeout: 15000
+ 
 stripe:
   api:
-    public-key: ${STRIPE_PUBLIC_KEY:your_public_key_here}
-    secret-key: ${STRIPE_SECRET_KEY:your_secret_key_here}
+    public-key: ${STRIPE_PUBLIC_KEY:your_stripe_public_key}
+    secret-key: ${STRIPE_SECRET_KEY:your_stripe_secret_key}
   webhook-secret: ${STRIPE_WEBHOOK_SECRET:your_webhook_secret_here}
-  monthly-price-id: ${STRIPE_MONTHLY_PRICE_ID:your_monthly_price_id}
-  yearly-price-id: ${STRIPE_YEARLY_PRICE_ID:your_yearly_price_id}
-
+  monthly-price-id: ${STRIPE_MONTHLY_PRICE_ID:price_1THI2c84DVOaveEmNNiglyw9}
+  yearly-price-id: ${STRIPE_YEARLY_PRICE_ID:price_1THI4D84DVOaveEmZ3XS3zNd}
+ 
 app:
   base-url: ${BASE_URL:http://localhost:8080}
+  security:
+    login:
+      maxFailedAttempts: 5 
+      captchaThreshold: 3  
+      lockMinutes: 15      
+    session:
+      timeoutWarningSeconds: 60 
+      maxConcurrentSessions: 1  
+      expireOldSessionOnNewLogin: true
  
-server:
-  port: ${PORT:8080}
+logging:
+  level:
+    org.springframework.security: INFO
+    com.golfcharity: INFO
