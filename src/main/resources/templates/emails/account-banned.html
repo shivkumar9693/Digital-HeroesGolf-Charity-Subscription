@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #fff1f0; color: #333; }
+        .wrapper { width: 100%; max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #ff4d4f; }
+        .header { background: #ff4d4f; padding: 40px 20px; text-align: center; color: #ffffff; }
+        .content { padding: 40px 30px; line-height: 1.6; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #999; }
+        .urgent-badge { background: #fff1f0; color: #ff4d4f; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1 style="margin: 0; font-size: 28px;">GolfForGood</h1>
+            <p style="margin: 10px 0 0; opacity: 0.8;">Play Golf. Win Big. Give Back.</p>
+        </div>
+        <div class="content">
+            <h2 style="color: #ff4d4f;">Account Access Suspended</h2>
+            <p>Hi <strong th:text="${userEmail}"></strong>,</p>
+            <p>We're writing to let you know that your GolfForGood account has been <span class="urgent-badge">BANNED</span>.</p>
+            <p>Our system has flagged your account for activity that violates our platform's Terms of Service or Fair Play standards (e.g., suspicious score logs or multiple account detections).</p>
+            
+            <div style="background: #fff1f0; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #ffa39e;">
+                <p style="margin: 0;"><strong>Active Status:</strong> Restricted Access</p>
+                <p style="margin: 5px 0 0;"><strong>Prize Eligibility:</strong> DISQUALIFIED</p>
+            </div>
+ 
+            <p style="margin-top: 30px; font-size: 14px; color: #666;">If you believe this was a mistake, you can submit an appeal by replying directly to this email with your platform username and score logs for the last 30 days.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 GolfForGood Compliance Team. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

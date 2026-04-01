@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Scores - GolfForGood</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Inter', sans-serif;}
+        .card { border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-3px); }
+        .nav-link { opacity: 0.8; transition: opacity 0.2s; }
+        .nav-link:hover, .nav-link.active { opacity: 1; border-bottom: 2px solid white; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3" style="background-color: #1e3c72 !important;">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="/dashboard">GolfForGood</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#subscriberNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="subscriberNav">
+            <ul class="navbar-nav align-items-lg-center mt-3 mt-lg-0">
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/dashboard">Overview</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3 active" href="/dashboard/scores">My Scores</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/dashboard/charity-selection">My Charity</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/pricing">Subscription Plan</a></li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <form th:action="@{/logout}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-light rounded-pill fw-bold px-4 w-100">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 mb-5 pb-5">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-4 pb-2 border-bottom">
+        <h1 class="h2 text-dark fw-bold">Score Management</h1>
+    </div>
+
+    <div class="row">
+        <!-- Add Score Form -->
+        <div class="col-md-5 mb-4">
+            <div class="card p-3 h-100">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Add New Round</h5>
+                    <form th:action="@{/dashboard/scores}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label text-muted fw-bold">Stableford Points</label>
+                            <input type="number" name="score" class="form-control bg-light border-0 py-3" placeholder="1-45" min="1" max="45" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label text-muted fw-bold">Round Date</label>
+                            <input type="date" name="scoreDate" class="form-control bg-light border-0 py-3" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary border-0 w-100 fw-bold rounded-pill py-3" style="background-color: #1e3c72;">Sync Score to Algorithm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scores List -->
+        <div class="col-md-7 mb-4">
+            <div class="card p-3 h-100">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-2">My Rolling Scores</h5>
+                    <p class="text-muted small mb-4">Only your 5 most recent scores are active in the system. Submitting a 6th automatically clears out your oldest entry.</p>
+                    
+                    <ul class="list-group mt-3" th:if="${!scores.isEmpty()}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-4 bg-transparent border-light border-bottom border-top-0" th:each="s : ${scores}">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded text-center me-3 d-none d-sm-block">📅</div>
+                                <span class="fw-bold text-dark fs-5" th:text="${s.scoreDate}">2024-01-01</span>
+                            </div>
+                            <span class="badge rounded-pill fs-4 px-4 py-2 shadow-sm text-white" style="background-color: #2a5298;" th:text="${s.score}">36</span>
+                        </li>
+                    </ul>
+                    
+                    <div th:if="${scores.isEmpty()}" class="text-center p-5 bg-light rounded mt-3">
+                        <h1 class="display-3 mb-3">🏌️</h1>
+                        <p class="text-muted mb-0 fw-bold fs-5">Your scorecard is empty. Hit the links and log your first round today!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

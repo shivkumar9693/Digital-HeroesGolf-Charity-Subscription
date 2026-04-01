@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pricing - Golf Charity Subscription</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Inter', sans-serif;}
+        .card { border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .nav-link { opacity: 0.8; transition: opacity 0.2s; }
+        .nav-link:hover, .nav-link.active { opacity: 1; border-bottom: 2px solid white; }
+        .pricing-card { border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.2s; }
+        .pricing-card:hover { transform: translateY(-5px); }
+        .card-header { background-color: #fff; border-bottom: none; font-weight: 700; padding: 30px 0 10px; border-radius: 15px 15px 0 0 !important; }
+        .price { font-size: 3rem; font-weight: 800; color: #1e3c72; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3" style="background-color: #1e3c72 !important;">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="/dashboard">GolfForGood</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#subscriberNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="subscriberNav">
+            <ul class="navbar-nav align-items-lg-center mt-3 mt-lg-0" sec:authorize="isAuthenticated()">
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/dashboard">Overview</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/dashboard/scores">My Scores</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/dashboard/charity-selection">My Charity</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3 active" href="/pricing">Subscription Plan</a></li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <form th:action="@{/logout}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-light rounded-pill fw-bold px-4 w-100">Logout</button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav align-items-lg-center mt-3 mt-lg-0" sec:authorize="!isAuthenticated()">
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-white px-3 active" href="/pricing">Pricing</a></li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <a href="/login" class="btn btn-outline-light rounded-pill fw-bold px-4 w-100">Login</a>
+                </li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <a href="/register" class="btn btn-light rounded-pill fw-bold px-4 text-dark w-100">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 mb-5 pb-5">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-4 pb-2 border-bottom">
+        <h1 class="h2 text-dark fw-bold">Select Active Plan</h1>
+    </div>
+
+    <p class="text-muted mb-5 fs-5">Join the algorithmic ecosystem, map your scores, and automatically support a charity on your roster.</p>
+
+    <div class="row">
+        <!-- Monthly -->
+        <div class="col-md-5 mb-4">
+            <div class="card pricing-card text-center h-100 p-3">
+                <div class="card-header pb-0">
+                    <h4 class="mb-0 text-muted fw-bold">Monthly Vector</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="price">£15<span class="fs-4 text-muted">/mo</span></h1>
+                    <ul class="list-unstyled mt-4 mb-4 text-muted fs-5">
+                        <li class="mb-3">✓ Compute 5 active scores a month</li>
+                        <li class="mb-3">✓ Auto-entry into prize draw</li>
+                        <li class="mb-3">✓ Minimum 10% injected to Charity</li>
+                    </ul>
+                    <form th:action="@{/subscribe}" method="post">
+                        <input type="hidden" name="plan" value="MONTHLY">
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold fs-5">Select Monthly</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yearly -->
+        <div class="col-md-5 mb-4">
+            <div class="card pricing-card text-center h-100 p-3" style="border: 3px solid #1e3c72;">
+                <div class="card-header text-primary pb-0">
+                    <h4 class="mb-0 fw-bold" style="color:#1e3c72;">Yearly Anchor</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="price">£144<span class="fs-4 text-muted">/yr</span></h1>
+                    <ul class="list-unstyled mt-4 mb-4 text-muted fs-5">
+                        <li class="mb-3">✓ Compute 5 active scores a month</li>
+                        <li class="mb-3">✓ Auto-entry into prize draw</li>
+                        <li class="mb-3">✓ Minimum 10% injected to Charity</li>
+                        <li class="mb-3 fw-bold text-success fs-5">✨ Retain £36 annually</li>
+                    </ul>
+                    <form th:action="@{/subscribe}" method="post">
+                        <input type="hidden" name="plan" value="YEARLY">
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold fs-5 shadow-sm" style="background-color:#1e3c72; border:none;">Select Yearly</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
