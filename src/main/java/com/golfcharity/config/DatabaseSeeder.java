@@ -17,6 +17,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Thread.sleep(2000); // 🏁 Small delay to ensure DB tables are ready
         String adminEmail = "shivkumarthakur9693@gmail.com";
         // New Database: Set up the Default Admin account
         if (userRepository.findByEmail(adminEmail).isEmpty()) {
